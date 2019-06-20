@@ -26,10 +26,10 @@ Since Graphsh represents nested fields as something akin to directories, use the
 ```
 › .repository(owner: "jclem", name: "graphsh")
 › pp
-.repository(owner: "jclem", name: "graphsh")
+.query.repository(owner: "jclem", name: "graphsh")
 › .owner
 › pp
-.repository(owner: "jclem", name: "graphsh").owner
+.query.repository(owner: "jclem", name: "graphsh").owner
 ```
 
 You can use `..` to traverse upwards:
@@ -37,10 +37,16 @@ You can use `..` to traverse upwards:
 ```
 › .repository(owner: "jclem", name: "graphsh").owner
 › pp
-.repository(owner: "jclem", name: "graphsh").owner
+.query.repository(owner: "jclem", name: "graphsh").owner
 › ..
 › pp
-.repository(owner: "jclem", name: "graphsh")
+.query.repository(owner: "jclem", name: "graphsh")
+› .owner.repositories
+› pp
+.query.repository(owner: "jclem", name: "graphsh").owner.repositories
+› ../..
+› pp
+.query.repository(owner: "jclem", name: "graphsh")
 ```
 
 #### `on`
@@ -86,10 +92,10 @@ The `pp` command shows your present path.
 ```
 › .repository(owner: "jclem", name: "graphsh")
 › pp
-.repository(owner: "jclem", name: "graphsh")
+.query.repository(owner: "jclem", name: "graphsh")
 › .owner
 › pp
-.repository(owner: "jclem", name: "graphsh").owner
+.query.repository(owner: "jclem", name: "graphsh").owner
 ```
 
 #### `pq`

@@ -1,15 +1,23 @@
 package command
 
 import (
+	"regexp"
+	"strings"
+
 	"github.com/jclem/graphsh/types"
 )
 
 // Up traverses up one node
-type Up struct{}
+type Up struct {
+	levels int
+}
+
+var upPattern = regexp.MustCompile(`^\.\.(?:\/\.\.)*$`)
 
 func testUp(input string) (Command, error) {
-	if input == ".." {
-		return &Up{}, nil
+	if upPattern.Match([]byte(input)) {
+		length := len(strings.Split(input, "/")) - 1
+		return &Up{length}, nil
 	}
 
 	return nil, nil
@@ -17,10 +25,13 @@ func testUp(input string) (Command, error) {
 
 // Execute implements the Command interface
 func (c Up) Execute(s types.Session) error {
-	if s.CurrentQuery() == s.RootQuery() {
-		return nil
+	for i := 0; i <= c.levels; i++ {
+		if s.CurrentQuery() == s.RootQuery() {
+			return nil
+		}
+
+		s.SetCurrentQuery(s.CurrentQuery().Drop())
 	}
 
-	s.SetCurrentQuery(s.CurrentQuery().Drop())
 	return nil
 }
