@@ -13,7 +13,7 @@ type Command interface {
 
 // A list of tests per-command that determines if input matches a command
 // Define one per command file with the name `test$CommandName`.
-var tests = []func(input string) (Command, error){testExit, testLs, testOn, testPp, testPq, testUp, testTraverse, testQuery}
+var tests = []func(input string) (Command, error){testExit, testHelp, testLs, testOn, testPp, testPq, testUp, testTraverse, testQuery}
 
 // FindCommand finds a command for a given input
 func FindCommand(input string) (Command, error) {
