@@ -11,6 +11,7 @@ import (
 
 	"github.com/chzyer/readline"
 	"github.com/jclem/graphsh/command"
+	"github.com/jclem/graphsh/completer"
 	"github.com/jclem/graphsh/graphql"
 	"github.com/jclem/graphsh/introspection"
 	"github.com/jclem/graphsh/querybuilder"
@@ -100,7 +101,10 @@ func Loop(options Options) {
 
 	isInterrupting := false
 
-	reader, err := readline.New("› ")
+	reader, err := readline.NewEx(&readline.Config{
+		Prompt:       "› ",
+		AutoComplete: completer.NewCompleter(s),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
