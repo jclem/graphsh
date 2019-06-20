@@ -19,6 +19,10 @@ $ graphsh https://api.github.com/graphql -H "Authorization: Bearer $token"
 
 ### Commands
 
+#### `help`
+
+The `help` command prints information about each command in graphsh, or can be provided a command name for help for a specific command.
+
 #### Path traversal
 
 Since Graphsh represents nested fields as something akin to directories, use the path traversal syntax to set your current path, relative to the current path.
